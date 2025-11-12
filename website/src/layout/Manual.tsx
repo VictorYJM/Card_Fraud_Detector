@@ -86,7 +86,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
     };
 
     const handleSubmit = () => {
-        const cardId = parseInt(cardSearch);
+        const cardId = parseInt(cardSelected);
         if (payers[cardId].card_bin != parseInt(cardBin)) {
             alert("Wrong password for this card!");
             return;
