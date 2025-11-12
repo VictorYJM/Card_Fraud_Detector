@@ -1,9 +1,15 @@
 import os
 import pandas as pd
 from fastapi import FastAPI
+from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
-BASE_DIR = os.path.dirname(__file__)
+load_dotenv()
+
+payers_url = os.getenv("PAYERS_PATH")
+terminals_url = os.getenv("TERMINALS_PATH")
+transactions_url = os.getenv("TRANSACTIONS_PATH")
+
 app = FastAPI()
 
 origins = ["http://localhost:5173"]
@@ -16,10 +22,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 1. Leitura dos dados
-payers = pd.read_parquet(os.path.join(BASE_DIR, "data/payers.parquet"))
-terminals = pd.read_parquet(os.path.join(BASE_DIR, "data/terminals.parquet"))
-transactions = pd.read_parquet(os.path.join(BASE_DIR, "data/transactions.parquet"))
+assert payers_url is not None, "PAYERS_PATH missing!"
+assert terminals_url is not None, "TERMINALS_PATH missing!"
+assert transactions_url is not None, "TRANSACTIONS_PATH missing!"
+
+payers = pd.read_parquet(payers_url)
+terminals = pd.read_parquet(terminals_url)
+transactions = pd.read_parquet(transactions_url)
+
+
+payers = pd.read_parquet(payers_url)
+terminals = pd.read_parquet(terminals_url)
+transactions = pd.read_parquet(transactions_url)
+
 
 # 2. Formatação dos dados
 payers = payers.drop(columns="card_first_transaction")
