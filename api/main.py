@@ -6,9 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
-payers_url = os.getenv("PAYERS_PATH")
-terminals_url = os.getenv("TERMINALS_PATH")
-transactions_url = os.getenv("TRANSACTIONS_PATH")
+payers_url = os.getenv("PAYERS_PATH") or (_ for _ in ()).throw(ValueError("PAYERS_PATH missing!"))
+terminals_url = os.getenv("TERMINALS_PATH") or (_ for _ in ()).throw(ValueError("TERMINALS_PATH missing!"))
+transactions_url = os.getenv("TRANSACTIONS_PATH") or (_ for _ in ()).throw(ValueError("TRANSACTIONS_PATH missing!"))
 
 app = FastAPI()
 
@@ -22,23 +22,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-assert payers_url is not None, "PAYERS_PATH missing!"
-assert terminals_url is not None, "TERMINALS_PATH missing!"
-assert transactions_url is not None, "TRANSACTIONS_PATH missing!"
+@app.on_event("startup")
+def load_data():
+    global payers, terminals, transactions
 
-payers = pd.read_parquet(payers_url)
-terminals = pd.read_parquet(terminals_url)
-transactions = pd.read_parquet(transactions_url)
+    # 1. Obtenção dos dados
+    payers = pd.read_parquet(payers_url)
+    terminals = pd.read_parquet(terminals_url)
+    transactions = pd.read_parquet(transactions_url)
 
-
-payers = pd.read_parquet(payers_url)
-terminals = pd.read_parquet(terminals_url)
-transactions = pd.read_parquet(transactions_url)
-
-
-# 2. Formatação dos dados
-payers = payers.drop(columns="card_first_transaction")
-terminals = terminals.drop(columns=["latitude", "longitude", "terminal_operation_start"])
+    # 2. Formatação dos dados
+    payers = payers.drop(columns="card_first_transaction")
+    terminals = terminals.drop(columns=["latitude", "longitude", "terminal_operation_start"])
 
 @app.get("/payers")
 def get_payers():
