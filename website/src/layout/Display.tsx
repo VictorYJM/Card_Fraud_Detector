@@ -15,7 +15,7 @@ const Display = () => {
     useEffect(() => {
         const fetchPayers = async () => {
             try {
-                const response = await fetch("http://localhost:8000/payers");
+                const response = await fetch("https://victoryjm-card-fraud-detection.hf.space/payers");
                 if (!response.ok) { throw new Error(`Response status: ${response.status}`); }
 
                 const result = await response.json();
@@ -27,7 +27,7 @@ const Display = () => {
 
         const fetchTerminals = async () => {
             try {
-                const response = await fetch("http://localhost:8000/terminals");
+                const response = await fetch("https://victoryjm-card-fraud-detection.hf.space/terminals");
                 if (!response.ok) { throw new Error(`Response status: ${response.status}`); }
 
                 const result = await response.json();

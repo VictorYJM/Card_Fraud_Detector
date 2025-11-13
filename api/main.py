@@ -12,7 +12,7 @@ transactions_url = os.getenv("TRANSACTIONS_PATH") or (_ for _ in ()).throw(Value
 
 app = FastAPI()
 
-origins = ["http://localhost:5173"]
+origins = ["https://victoryjm-card-fraud-detection.hf.space"]
 
 app.add_middleware(
     CORSMiddleware,
