@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import type Payer from "../types/payers";
 import type Terminal from "../types/terminals";
 
-import Manual from "./Manual";
-import Random from "./Random";
+import Batch from "./validation/Batch";
+import Manual from "./validation/Manual";
+import ManualGeneration from "./generation/ManualGeneration";
+import RandomGeneration from "./generation/RandomGeneration";
 
 const Display = () => {
-    const [activeTab, setActiveTab] = useState("manual");
+    const [activeTab, setActiveTab] = useState("single");
 
     const [payers, setPayers] = useState<Payer[]>([]);
     const [terminals, setTerminals] = useState<Terminal[]>([]);
@@ -50,29 +52,53 @@ const Display = () => {
                         <div className="flex justify-center border-b-2 border-gray-200 mb-4">
                             <button
                                 className={`px-4 py-2 text-sm font-medium focus:outline-none transition-colors duration-100 ${
-                                    activeTab === "manual"
+                                    activeTab === "single"
                                         ? "border-b-2 border-blue-500 text-blue-600 mb-[-2px]"
                                         : "text-gray-500 hover:text-gray-900"
                                 }`}
-                                onClick={() => setActiveTab("manual")}
+                                onClick={() => setActiveTab("single")}
                             >
-                                Digitados Manualmente
+                                Single Validation
                             </button>
+
                             <button
                                 className={`px-4 py-2 text-sm font-medium focus:outline-none transition-colors duration-100 ${
-                                    activeTab === "random"
+                                    activeTab === "batch"
                                         ? "border-b-2 border-blue-500 text-blue-600 mb-[-2px]"
                                         : "text-gray-500 hover:text-gray-900"
                                 }`}
-                                onClick={() => setActiveTab("random")}
+                                onClick={() => setActiveTab("batch")}
                             >
-                                Gerados Aleatoriamente
+                                Batch Validation
+                            </button>
+
+                            <button
+                                className={`px-4 py-2 text-sm font-medium focus:outline-none transition-colors duration-100 ${
+                                    activeTab === "manual-generation"
+                                        ? "border-b-2 border-blue-500 text-blue-600 mb-[-2px]"
+                                        : "text-gray-500 hover:text-gray-900"
+                                }`}
+                                onClick={() => setActiveTab("manual-generation")}
+                            >
+                                Manual Transaction Generation
+                            </button>
+
+                            <button
+                                className={`px-4 py-2 text-sm font-medium focus:outline-none transition-colors duration-100 ${
+                                    activeTab === "random-generation"
+                                        ? "border-b-2 border-blue-500 text-blue-600 mb-[-2px]"
+                                        : "text-gray-500 hover:text-gray-900"
+                                }`}
+                                onClick={() => setActiveTab("random-generation")}
+                            >
+                                Random Transaction Generation
                             </button>
                         </div>
                         
-                        {activeTab === "manual" 
-                            ? <Manual payers={payers} terminals={terminals} /> 
-                            : <Random payers={payers} terminals={terminals} />}
+                        {activeTab === "single" && <Manual payers={payers} terminals={terminals} />}
+                        {activeTab === "batch" && <Batch/>}
+                        {activeTab === "manual-generation" && <ManualGeneration payers={payers} terminals={terminals}/>}
+                        {activeTab === "random-generation" && <RandomGeneration payers={payers} terminals={terminals} />}
                     </div>
                 </div>
             </div>

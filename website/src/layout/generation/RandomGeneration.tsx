@@ -1,19 +1,19 @@
 import { useMemo, useState } from "react";
 
-import type Payer from "../types/payers";
-import type Terminal from "../types/terminals";
-import type Transaction from "../types/transactions";
+import type Payer from "../../types/payers";
+import type Terminal from "../../types/terminals";
+import type Transaction from "../../types/transactions";
 
-import Input from "../common/Input";
+import Input from "../../common/Input";
 
-interface RandomProps {
+interface RandomGenerationProps {
     payers: Payer[];
     terminals: Terminal[];
 };
 
-const Random = ({ payers, terminals }: RandomProps) => {
+const RandomGeneration = ({ payers, terminals }: RandomGenerationProps) => {
     const [generationCount, setGenerationCount] = useState<string>("5");
-    const [randomTransactions, setRandomTransactions] = useState<Transaction[]>([]);
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
 
     const terminalMap = useMemo(() => {
         return terminals.reduce((acc, terminal) => {
@@ -50,16 +50,27 @@ const Random = ({ payers, terminals }: RandomProps) => {
             });
         }
 
-        setRandomTransactions(newTransactions);
+        setTransactions(newTransactions);
     };
 
-    const handleSubmit = () => {
-        
+    const handleSave = () => {
+        if (transactions.length === 0) {
+            alert("There's no transaction to save!")
+            return;
+        }
+
+        const dataStr = JSON.stringify(transactions, null, 2);
+        const blob = new Blob([dataStr], { type: "application/json" });
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "transactions.json";
+        link.click();
     };
 
     return (
         <div className="w-full">
-            {/* Controles de Geração */}
+            {/* Generation Control */}
             <div className="flex items-end gap-4 mb-6">
                 <div className="flex-1">
                     <Input
@@ -71,7 +82,7 @@ const Random = ({ payers, terminals }: RandomProps) => {
                             if (value > 100) value = 100;
                             setGenerationCount(String(value));
                         }}
-                        label="Quantidade para Gerar"
+                        label="Number of transactions to generate"
                         labelStyle="font-bold block mb-2"
                         type="number"
                         inputStyle="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -83,25 +94,25 @@ const Random = ({ payers, terminals }: RandomProps) => {
                         onClick={handleGenerate}
                         className="w-full p-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 transition-colors"
                     >
-                        Gerar Dados
+                        Generate data
                     </button>
                 </div>
             </div>
 
-            {/* Tabela de Resultados */}
-            {randomTransactions.length > 0 && (
+            {/* Table of Results */}
+            {transactions.length > 0 && (
                 <div className="max-h-96 overflow-y-auto border-2 border-gray-200 rounded-lg">
                     <table className="w-full text-sm text-left text-gray-700">
                         <thead className="text-xs text-gray-800 uppercase bg-gray-100 sticky top-0">
                             <tr>
                                 <th scope="col" className="px-6 py-3">Card ID</th>
                                 <th scope="col" className="px-6 py-3">Terminal</th>
-                                <th scope="col" className="px-6 py-3">Data & Hora</th>
-                                <th scope="col" className="px-6 py-3 text-right">Valor (R$)</th>
+                                <th scope="col" className="px-6 py-3">Date and Time</th>
+                                <th scope="col" className="px-6 py-3 text-right">Amount (R$)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {randomTransactions.map((tx, index) => (
+                            {transactions.map((tx, index) => (
                                 <tr key={index} className="bg-white border-b hover:bg-gray-50">
                                     <td className="px-6 py-4">{tx.card_id}</td>
                                     <td className="px-6 py-4">{terminalMap[tx.terminal_id]}</td>
@@ -116,23 +127,17 @@ const Random = ({ payers, terminals }: RandomProps) => {
                 </div>
             )}
 
-            {/* Response Fields */}
+            {/* Save Transactions */}
             <div className="mt-4 flex gap-4 items-start">
-                <div className="w-2/5">
-                    <button
-                        onClick={handleSubmit}
-                        className="w-full rounded-2xl border-2 border-black font-bold"
-                    >
-                        Validate
-                    </button>
-                </div>
-
-                <div className="w-3/5 text-center border-2 border-black">
-                    <label>RESPOSTA</label>
-                </div>
+                <button
+                    onClick={handleSave}
+                    className="w-full rounded-2xl border-2 border-black font-bold hover:bg-gray-100 active:bg-gray-200"
+                >
+                    Save data
+                </button>
             </div>
         </div>
     );
 };
 
-export default Random;
+export default RandomGeneration;
