@@ -2,5 +2,4 @@ pandas
 fastapi
 uvicorn
 pyarrow
-fastparquet
 python-dotenv
