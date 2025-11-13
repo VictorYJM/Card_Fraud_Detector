@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type Payer from "../../types/payers";
 import type Terminal from "../../types/terminals";
@@ -11,6 +11,10 @@ interface ManualGenerationProps {
 
 const ManualGeneration = ({ payers, terminals }: ManualGenerationProps) => {
     const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+    useEffect(() => {
+        setTransactions([]);
+    }, [])
 
     return (
         <div>
