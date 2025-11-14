@@ -22,7 +22,7 @@ const ManualGeneration = ({ payers, terminals }: ManualGenerationProps) => {
 
     const [cardBin, setCardBin] = useState<string>("");
     const [transactionDatetime, setTransactionDatetime] = useState<string>("2018-01-01T00:00:10");
-    const [transactionAmount, setTransactionAmount] = useState<string>("0.00");
+    const [transactionAmount, setTransactionAmount] = useState<string>("0.01");
 
     const [showCardDropdown, setShowCardDropdown] = useState<boolean>(false);
     const [showTerminalDropdown, setShowTerminalDropdown] = useState<boolean>(false);
@@ -259,7 +259,7 @@ const ManualGeneration = ({ payers, terminals }: ManualGenerationProps) => {
                     onChange={(e) => {
                         let value = parseFloat(e.target.value);
                         if (isNaN(value)) { value = 0; }
-                        if (value < 0) { value = 0; }
+                        if (value <= 0) { value = 0.01; }
                         if (value > 10000) { value = 10000; }
                         setTransactionAmount(value.toFixed(2));
                     }}
