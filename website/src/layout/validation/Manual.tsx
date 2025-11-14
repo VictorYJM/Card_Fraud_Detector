@@ -106,7 +106,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
             terminal_id: parseInt(terminalSelected),
             tx_amount: parseFloat(transactionAmount),
             tx_datetime: new Date(transactionDatetime)
-        }
+        };
 
         console.log(transaction);
     };
