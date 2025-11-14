@@ -1,4 +1,5 @@
 import type React from "react";
+import { forwardRef } from "react";
 
 interface InputProps {
     value: string;
@@ -12,10 +13,12 @@ interface InputProps {
     maxLength?: number;
     min?: string;
     max?: string;
+    readonly?: boolean;
+    accept?: string;
     inputStyle?: string;
 };
 
-const Input: React.FC<InputProps> = ({
+const Input = forwardRef<HTMLInputElement, InputProps>(({
     value,
     onChange,
     placeholder,
@@ -27,8 +30,10 @@ const Input: React.FC<InputProps> = ({
     maxLength,
     min,
     max,
+    readonly,
+    accept,
     inputStyle
-}) => {
+}, ref) => {
     return (
         <div>
             {label && <label className={labelStyle}>{label}</label>}
@@ -42,10 +47,13 @@ const Input: React.FC<InputProps> = ({
                 maxLength={maxLength}
                 min={min}
                 max={max}
+                readOnly={readonly}
+                accept={accept}
+                ref={ref}
                 className={inputStyle}
             />
         </div>
     );
-};
+});
 
 export default Input;

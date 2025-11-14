@@ -19,6 +19,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
     const [cardSelected, setCardSelected] = useState<string>("");
     const [terminalSelected, setTerminalSelected] = useState<string>("");
 
+    const [cardBin, setCardBin] = useState<string>("");
     const [transactionDatetime, setTransactionDatetime] = useState<string>("2018-01-01T00:00:10");
     const [transactionAmount, setTransactionAmount] = useState<string>("0.00");
 
@@ -37,6 +38,15 @@ const Manual = ({ payers, terminals }: ManualProps) => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
+
+    useEffect(() => {
+        if (cardSelected) {
+            const selectedPayer = payers.find(p => String(p.card_id) === cardSelected);
+            if (selectedPayer) { setCardBin(String(selectedPayer.card_bin)); }
+        }
+
+        else { setCardBin(""); }
+    }, [cardSelected, payers])
 
     const filteredPayers = useMemo(() => {
         if (!cardSearch) { return []; }
@@ -84,14 +94,15 @@ const Manual = ({ payers, terminals }: ManualProps) => {
         setTransactionDatetime(formattedDate);
     };
 
-    const handleSubmit = () => {
-        if (!cardSelected || !terminalSelected) {
+    const handleClassify = () => {
+        if (!cardSelected || !cardBin || !terminalSelected) {
             alert("Invalid transaction!")
             return;
         }
 
         const transaction: Transaction = {
             card_id: parseInt(cardSelected),
+            card_bin: parseInt(cardBin),
             terminal_id: parseInt(terminalSelected),
             tx_amount: parseFloat(transactionAmount),
             tx_datetime: new Date(transactionDatetime)
@@ -102,17 +113,22 @@ const Manual = ({ payers, terminals }: ManualProps) => {
 
     return (
         <div className="w-full">
-            {/* Card and Terminal */}
+            {/* Card */}
             <div className="flex gap-4 items-start">
                 {/* Card ID */}
                 <div className="flex-1" ref={cardDropdownRef}>
                     <Input
                         value={cardSearch}
                         onChange={(e) => {
-                            setCardSearch(e.target.value);
+                            const value = e.target.value;
+                            setCardSearch(value);
                             setShowCardDropdown(true);
+                            
+                            const exactMatch = payers.find(p => String(p.card_id) === value);
+
+                            (exactMatch) ? setCardSelected(value) : setCardSelected("")
                         }}
-                        placeholder="Type to search for card"
+                        placeholder="Type to search for card..."
                         label="Card ID"
                         labelStyle="font-bold block mb-2"
                         type="number"
@@ -133,35 +149,55 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                     )}
                 </div>
 
-                {/* Terminal ID */}
-                <div className="flex-1" ref={terminalDropdownRef}>
+                {/* Card Bin */}
+                <div className="flex-1">
                     <Input
-                        value={terminalSearch}
+                        value={cardBin}
                         onChange={(e) => {
-                            setTerminalSearch(e.target.value);
-                            setShowTerminalDropdown(true);
+                            const value = e.target.value.replace(/\D/g, "");
+                            if (value.length <= 6) { setCardBin(value); }
                         }}
-                        placeholder="Type to search for terminal..."
-                        label="Terminal"
+                        placeholder="000000"
+                        label="Card Bin"
                         labelStyle="font-bold block mb-2"
                         type="text"
-                        maxLength={100}
-                        inputStyle="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        inputMode="numeric"
+                        pattern="\d{6}"
+                        maxLength={6}
+                        readonly={true}
+                        inputStyle="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
                     />
-
-                    {showTerminalDropdown && (
-                        <Dropdown
-                            items={filteredTerminals}
-                            getKey={(terminal) => terminal.terminal_id}
-                            renderItem={(terminal) => <>{terminal.terminal_soft_descriptor}</>}
-                            onSelectItems={(terminal) => {
-                                setTerminalSearch(terminal.terminal_soft_descriptor);
-                                setTerminalSelected(String(terminal.terminal_id));
-                                setShowTerminalDropdown(false);
-                            }}
-                        />
-                    )}
                 </div>
+            </div>
+
+            {/* Terminal ID */}
+            <div className="mt-4 flex-1" ref={terminalDropdownRef}>
+                <Input
+                    value={terminalSearch}
+                    onChange={(e) => {
+                        setTerminalSearch(e.target.value);
+                        setShowTerminalDropdown(true);
+                    }}
+                    placeholder="Type to search for terminal..."
+                    label="Terminal"
+                    labelStyle="font-bold block mb-2"
+                    type="text"
+                    maxLength={100}
+                    inputStyle="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                {showTerminalDropdown && (
+                    <Dropdown
+                        items={filteredTerminals}
+                        getKey={(terminal) => terminal.terminal_id}
+                        renderItem={(terminal) => <>{terminal.terminal_soft_descriptor}</>}
+                        onSelectItems={(terminal) => {
+                            setTerminalSearch(terminal.terminal_soft_descriptor);
+                            setTerminalSelected(String(terminal.terminal_id));
+                            setShowTerminalDropdown(false);
+                        }}
+                    />
+                )}
             </div>
 
             {/* Transaction Datetime */}
@@ -200,15 +236,15 @@ const Manual = ({ payers, terminals }: ManualProps) => {
             <div className="mt-4 flex gap-4 items-start">
                 <div className="w-2/5">
                     <button
-                        onClick={handleSubmit}
+                        onClick={handleClassify}
                         className="w-full rounded-2xl border-2 border-black font-bold hover:bg-gray-100 active:bg-gray-200"
                     >
-                        Validate
+                        Classify Transaction
                     </button>
                 </div>
 
-                <div className="w-3/5 text-center border-2 border-black">
-                    <label>RESPOSTA</label>
+                <div className="w-3/5 text-center border-2 border-black font-bold">
+                    <label>RESPONSE</label>
                 </div>
             </div>
         </div>
