@@ -17,7 +17,8 @@ const Display = () => {
     useEffect(() => {
         const fetchPayers = async () => {
             try {
-                const response = await fetch("https://victoryjm-card-fraud-detection.hf.space/payers");
+                const URL = import.meta.env.VITE_API_PAYERS;
+                const response = await fetch(URL);
                 if (!response.ok) { throw new Error(`Response status: ${response.status}`); }
 
                 const result = await response.json();
@@ -29,7 +30,8 @@ const Display = () => {
 
         const fetchTerminals = async () => {
             try {
-                const response = await fetch("https://victoryjm-card-fraud-detection.hf.space/terminals");
+                const URL = import.meta.env.VITE_API_TERMINALS;
+                const response = await fetch(URL);
                 if (!response.ok) { throw new Error(`Response status: ${response.status}`); }
 
                 const result = await response.json();
@@ -47,7 +49,7 @@ const Display = () => {
         <div className="flex justify-center items-center mx-20 my-20">
             <div className="max-w-2xl rounded-2xl border-2 border-black overflow-hidden shadow-2xl shadow-gray-300">
                 <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2 text-center">Análise de Fraudes em Cartões</div>
+                    <div className="font-bold text-xl mb-2 text-center">Card Fraud Detection AI</div>
                     <div className="text-gray-700 text-base mt-4">
                         <div className="flex justify-center border-b-2 border-gray-200 mb-4">
                             <button
@@ -58,7 +60,7 @@ const Display = () => {
                                 }`}
                                 onClick={() => setActiveTab("single")}
                             >
-                                Single Validation
+                                Single Classify
                             </button>
 
                             <button
@@ -69,7 +71,7 @@ const Display = () => {
                                 }`}
                                 onClick={() => setActiveTab("batch")}
                             >
-                                Batch Validation
+                                Batch Classify
                             </button>
 
                             <button

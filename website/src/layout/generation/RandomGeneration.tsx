@@ -5,6 +5,7 @@ import type Terminal from "../../types/terminals";
 import type Transaction from "../../types/transactions";
 
 import Input from "../../common/Input";
+import Table, { type ColumnDef } from "../../common/Table";
 
 interface RandomGenerationProps {
     payers: Payer[];
@@ -21,6 +22,30 @@ const RandomGeneration = ({ payers, terminals }: RandomGenerationProps) => {
             return acc;
         }, {} as Record<number, string>);
     }, [terminals]);
+
+    const columns = useMemo((): ColumnDef<Transaction>[] => [
+        {
+            header: "Card ID",
+            renderCell: (tx) => tx.card_id,
+        },
+        {
+            header: "Card Bin",
+            renderCell: (tx) => tx.card_bin,
+        },
+        {
+            header: "Terminal",
+            renderCell: (tx) => terminalMap[tx.terminal_id] || "N/A",
+        },
+        {
+            header: "Data & Hora",
+            renderCell: (tx) => tx.tx_datetime.toLocaleString("pt-BR"),
+        },
+        {
+            header: "Valor (R$)",
+            renderCell: (tx) => tx.tx_amount.toFixed(2),
+            cellStyle: "text-right",
+        },
+    ], [terminalMap]);
 
     const handleGenerate = () => {
         if (payers.length === 0 || terminals.length === 0) { return; }
@@ -44,6 +69,7 @@ const RandomGeneration = ({ payers, terminals }: RandomGenerationProps) => {
 
             newTransactions.push({
                 card_id: randomPayer.card_id,
+                card_bin: randomPayer.card_bin,
                 terminal_id: randomTerminal.terminal_id,
                 tx_amount: parseFloat(parseFloat(randomAmount).toFixed(2)),
                 tx_datetime: randomDate,
@@ -94,37 +120,18 @@ const RandomGeneration = ({ payers, terminals }: RandomGenerationProps) => {
                         onClick={handleGenerate}
                         className="w-full p-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 transition-colors"
                     >
-                        Generate data
+                        Generate Transactions
                     </button>
                 </div>
             </div>
 
-            {/* Table of Results */}
+            {/* Table of Transactions */}
             {transactions.length > 0 && (
-                <div className="max-h-96 overflow-y-auto border-2 border-gray-200 rounded-lg">
-                    <table className="w-full text-sm text-left text-gray-700">
-                        <thead className="text-xs text-gray-800 uppercase bg-gray-100 sticky top-0">
-                            <tr>
-                                <th scope="col" className="px-6 py-3">Card ID</th>
-                                <th scope="col" className="px-6 py-3">Terminal</th>
-                                <th scope="col" className="px-6 py-3">Date and Time</th>
-                                <th scope="col" className="px-6 py-3 text-right">Amount (R$)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {transactions.map((tx, index) => (
-                                <tr key={index} className="bg-white border-b hover:bg-gray-50">
-                                    <td className="px-6 py-4">{tx.card_id}</td>
-                                    <td className="px-6 py-4">{terminalMap[tx.terminal_id]}</td>
-                                    <td className="px-6 py-4">
-                                        {tx.tx_datetime.toLocaleString("pt-BR")}
-                                    </td>
-                                    <td className="px-6 py-4 text-right">{tx.tx_amount}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                <Table
+                    data={transactions}
+                    columns={columns}
+                    getKey={(tx) => `${tx.card_id}-${tx.tx_datetime.getTime()}`}
+                />
             )}
 
             {/* Save Transactions */}
@@ -133,7 +140,7 @@ const RandomGeneration = ({ payers, terminals }: RandomGenerationProps) => {
                     onClick={handleSave}
                     className="w-full rounded-2xl border-2 border-black font-bold hover:bg-gray-100 active:bg-gray-200"
                 >
-                    Save data
+                    Save Transactions
                 </button>
             </div>
         </div>
