@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 
 import type Payer from "../../types/payers";
 import type Terminal from "../../types/terminals";
+import type ApiResponse from "../../types/ApiResponse";
 import type Transaction from "../../types/transactions";
 
 import Input from "../../common/Input";
@@ -25,6 +26,9 @@ const Manual = ({ payers, terminals }: ManualProps) => {
 
     const [showCardDropdown, setShowCardDropdown] = useState<boolean>(false);
     const [showTerminalDropdown, setShowTerminalDropdown] = useState<boolean>(false);
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
 
     const cardDropdownRef = useRef<HTMLDivElement | null>(null);
     const terminalDropdownRef = useRef<HTMLDivElement | null>(null);
@@ -94,11 +98,14 @@ const Manual = ({ payers, terminals }: ManualProps) => {
         setTransactionDatetime(formattedDate);
     };
 
-    const handleClassify = () => {
+    const handleClassify = async () => {
         if (!cardSelected || !cardBin || !terminalSelected) {
-            alert("Invalid transaction!")
+            alert("Please fill in all card and terminal fields.");
             return;
         }
+
+        setApiResponse(null);
+        setIsLoading(true);
 
         const transaction: Transaction = {
             card_id: parseInt(cardSelected),
@@ -107,8 +114,31 @@ const Manual = ({ payers, terminals }: ManualProps) => {
             tx_amount: parseFloat(transactionAmount),
             tx_datetime: new Date(transactionDatetime)
         };
+        
+        try {
+            const URL = import.meta.env.VITE_API_CLASSIFY_TRANSACTION;
+            const response = await fetch(URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(transaction),
+            });
 
-        console.log(transaction);
+            if (!response.ok) { throw new Error(`API Error: ${response.statusText}`); }
+
+            const result: ApiResponse = await response.json();
+            setApiResponse(result);
+        }
+
+        catch (error) {
+            setApiResponse({
+                valid: false,
+                error: "Failed to connect to the server. Please try again."
+            });
+        }
+
+        finally { setIsLoading(false); }
     };
 
     return (
@@ -244,7 +274,13 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                 </div>
 
                 <div className="w-3/5 text-center border-2 border-black font-bold">
-                    <label>RESPONSE</label>
+                    {!apiResponse && !isLoading && <label>RESPONSE</label>}
+                    {isLoading && <label>Loading...</label>}
+                    {apiResponse && (
+                        <div className={`font-bold ${apiResponse.valid ? "text-green-600" : "text-red-600"}`}>
+                            {apiResponse.error ? `Error: ${apiResponse.error}` : `Transaction is ${apiResponse.valid ? "VALID" : "INVALID"}`}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
