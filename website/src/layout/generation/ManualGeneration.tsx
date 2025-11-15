@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 import type Payer from "../../types/payers";
 import type Terminal from "../../types/terminals";
@@ -6,13 +6,14 @@ import type Transaction from "../../types/transactions";
 
 import Input from "../../common/Input";
 import Dropdown from "../../common/Dropdown";
+import Table, { type ColumnDef } from "../../common/Table";
 
-interface ManualProps {
+interface ManualGenerationProps {
     payers: Payer[];
     terminals: Terminal[];
 };
 
-const Manual = ({ payers, terminals }: ManualProps) => {
+const ManualGeneration = ({ payers, terminals }: ManualGenerationProps) => {
     const [cardSearch, setCardSearch] = useState<string>("");
     const [terminalSearch, setTerminalSearch] = useState<string>("");
 
@@ -28,7 +29,40 @@ const Manual = ({ payers, terminals }: ManualProps) => {
 
     const cardDropdownRef = useRef<HTMLDivElement | null>(null);
     const terminalDropdownRef = useRef<HTMLDivElement | null>(null);
+
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
     
+    const terminalMap = useMemo(() => {
+        return terminals.reduce((acc, terminal) => {
+            acc[terminal.terminal_id] = terminal.terminal_soft_descriptor;
+            return acc;
+        }, {} as Record<number, string>);
+    }, [terminals]);
+
+    const columns = useMemo((): ColumnDef<Transaction>[] => [
+        {
+            header: "Card ID",
+            renderCell: (tx) => tx.card_id,
+        },
+        {
+            header: "Card Bin",
+            renderCell: (tx) => tx.card_bin,
+        },
+        {
+            header: "Terminal",
+            renderCell: (tx) => terminalMap[tx.terminal_id] || "N/A",
+        },
+        {
+            header: "Data & Hora",
+            renderCell: (tx) => tx.tx_datetime.toLocaleString("pt-BR"),
+        },
+        {
+            header: "Valor (R$)",
+            renderCell: (tx) => tx.tx_amount.toFixed(2),
+            cellStyle: "text-right",
+        },
+    ], [terminalMap]);
+
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (cardDropdownRef.current && !cardDropdownRef.current.contains(event.target as Node)) { setShowCardDropdown(false); }
@@ -94,7 +128,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
         setTransactionDatetime(formattedDate);
     };
 
-    const handleClassify = () => {
+    const handleAddTransaction = () => {
         if (!cardSelected || !cardBin || !terminalSelected) {
             alert("Invalid transaction!")
             return;
@@ -108,7 +142,11 @@ const Manual = ({ payers, terminals }: ManualProps) => {
             tx_datetime: new Date(transactionDatetime)
         };
 
-        console.log(transaction);
+        setTransactions(prev => [...prev, transaction]);
+    };
+
+    const handleClassify = () => {
+        console.log("its over");
     };
 
     return (
@@ -232,23 +270,36 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                 />
             </div>
 
-            {/* Response Fields */}
-            <div className="mt-4 flex gap-4 items-start">
-                <div className="w-2/5">
-                    <button
-                        onClick={handleClassify}
-                        className="w-full rounded-2xl border-2 border-black font-bold hover:bg-gray-100 active:bg-gray-200"
-                    >
-                        Classify Transaction
-                    </button>
-                </div>
+            {/* Transactions Button */}
+            <div className="mt-8 mb-6 flex-1 items-start">
+                <button
+                    onClick={handleAddTransaction}
+                    className="w-full rounded-2xl border-2 border-black font-bold hover:bg-gray-100 active:bg-gray-200"
+                >
+                    Add Transaction
+                </button>
+            </div>
 
-                <div className="w-3/5 text-center border-2 border-black font-bold">
-                    <label>RESPONSE</label>
-                </div>
+            {/* Table of Transactions */}
+            {transactions.length > 0 && (
+                <Table
+                    data={transactions}
+                    columns={columns}
+                    getKey={(tx) => `${tx.card_id}-${tx.tx_datetime.getTime()}`}
+                />
+            )}
+
+            {/* Transactions Classify */}
+            <div className="mt-8 mb-6 flex-1 items-start">
+                <button
+                    onClick={handleClassify}
+                    className="w-full rounded-2xl border-2 border-black font-bold hover:bg-gray-100 active:bg-gray-200"
+                >
+                    Classify Transactions
+                </button>
             </div>
         </div>
     );
 };
 
-export default Manual;
+export default ManualGeneration;
