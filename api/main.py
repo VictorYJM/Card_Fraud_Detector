@@ -60,7 +60,7 @@ def get_transactions():
     return transactions.to_dict(orient="records")
 
 # Transaction classify
-@app.get("/classify-transaction")
+@app.post("/classify-transaction")
 def classify_transaction(tx: TransactionRecord):
     payer = tx.card_id in payers["card_id"].values
     terminal = tx.terminal_id in terminals["terminal_id"].values
@@ -73,7 +73,7 @@ def classify_transaction(tx: TransactionRecord):
 
     return {"valid": response, "error": None}
 
-@app.get("/classify-transactions")
+@app.post("/classify-transactions")
 def classify_transactions(txs: list[TransactionRecord]):
     results = []
     for data in txs:
