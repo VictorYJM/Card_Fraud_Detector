@@ -1,4 +1,4 @@
 from models.TransactionRecord import TransactionRecord
 
-def validation(tx: TransactionRecord) -> bool:
+def is_fraud(tx: TransactionRecord) -> bool:
     return False

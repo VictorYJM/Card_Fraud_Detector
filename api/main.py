@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from models.TransactionRecord import TransactionRecord
 
-from functions.validation import validation
+from functions.validation import is_fraud
 from functions.feature_engineering import feature_engineering
 
 load_dotenv()
@@ -69,7 +69,7 @@ def classify_transaction(tx: TransactionRecord):
     if not payer or not terminal: return {"valid": False, "error": "Invalid data!"}
 
     feature_engineering(tx)
-    response: bool = validation(tx)
+    response: bool = fraud_validation(tx)
 
     return {"valid": response, "error": None}
 
@@ -90,7 +90,7 @@ def classify_transactions(txs: list[TransactionRecord]):
             continue
 
         feature_engineering(data)
-        response: bool = validation(data)
+        response: bool = is_fraud(data)
 
         results.append({
             "transaction": data.dict(),
