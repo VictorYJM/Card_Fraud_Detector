@@ -41,8 +41,8 @@ def load_data():
     transactions = pd.read_parquet(transactions_url)
 
     # 2. Data formatting
-    payers = payers.drop(columns="card_first_transaction")
-    terminals = terminals.drop(columns=["latitude", "longitude", "terminal_operation_start"])
+    # payers = payers.drop(columns="card_first_transaction")
+    # terminals = terminals.drop(columns=["latitude", "longitude", "terminal_operation_start"])
 
 # Payers / Cards GET
 @app.get("/payers")
