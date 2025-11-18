@@ -1,3 +1,12 @@
+numpy==2.3.5
+packaging==25.0
+pydantic==2.12.4
+pydantic_core==2.41.5
+pyinotify==0.9.6
+python-xlib==0.33
+six==1.17.0
+typing-inspection==0.4.2
+typing_extensions==4.15.0
 pandas
 fastapi
 uvicorn

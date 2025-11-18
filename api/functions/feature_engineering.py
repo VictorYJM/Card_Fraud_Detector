@@ -1,8 +1,10 @@
-from models import TransactionRecord, TransactionProcessed
+from api.models import TransactionProcessed, TransactionRecord
 from datetime import datetime
+import pandas as pd
+from pandas import DataFrame
 import numpy as np
-MICRO_TRANSACTION = 5
 
+MICRO_TRANSACTION = 5
 
 
 def haversine_distance(lat1, lon1, lat2, lon2):
@@ -24,27 +26,28 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     dlat = lat2_rad - lat1_rad
 
     # Fórmula de Haversine
-    a = np.sin(dlat / 2)**2 + np.cos(lat1_rad) * np.cos(lat2_rad) * np.sin(dlon / 2)**2
+    a = (
+        np.sin(dlat / 2) ** 2
+        + np.cos(lat1_rad) * np.cos(lat2_rad) * np.sin(dlon / 2) ** 2
+    )
     c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
 
     distance = R * c
     return distance
 
-def feature_engineering(tx: TransactionRecord) -> TransactionProcessed:
+
+def feature_engineering(tx: TransactionRecord, transactions : DataFrame) -> TransactionProcessed:
     dt = tx.tx_datetime
 
     tx_hour = dt.hour
-    is_weekend = int(dt.weekday >= 5)
-    is_night = 1 if(dt.hour >= 22 or dt.hour < 6) else 0
+    is_weekend = int(dt.weekday() >= 5)
+    is_night = 1 if (dt.hour >= 22 or dt.hour < 6) else 0
 
     card_lifetime_days = tx.tx_datetime - tx.card_first_transaction
-    is_micro_transaction = 1 if(tx.tx_amount < MICRO_TRANSACTION) else 0
+    is_micro_transaction = 1 if (tx.tx_amount < MICRO_TRANSACTION) else 0
 
-    last_latitude = pass
-    last_longitude = pass
+    last_latitude = None
+    last_longitude = None
 
-    distance_from_last_location_km = haversine_distance(tx.latitude, tx.longitude)
-
-
-
-
+    # distance_from_last_location_km = haversine_distance(tx.latitude, tx.longitude)
+    

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from models import TransactionRecord
+from api.models import TransactionRecord
 from datetime import datetime
 
 class TransactionProcessed(BaseModel):

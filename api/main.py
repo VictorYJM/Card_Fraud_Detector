@@ -4,10 +4,10 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
-from models.TransactionRecord import TransactionRecord
+from api.models.TransactionRecord import TransactionRecord
 
-from functions.validation import is_fraud
-from functions.feature_engineering import feature_engineering
+from api.functions.validation import is_fraud
+from api.functions.feature_engineering import feature_engineering
 
 load_dotenv()
 
@@ -40,6 +40,8 @@ def load_data():
     terminals = pd.read_parquet(terminals_url)
     transactions = pd.read_parquet(transactions_url)
 
+    
+
     # 2. Data formatting
     # payers = payers.drop(columns="card_first_transaction")
     # terminals = terminals.drop(columns=["latitude", "longitude", "terminal_operation_start"])
@@ -68,8 +70,8 @@ def classify_transaction(tx: TransactionRecord):
     # Unknown Payer / Card / Terminal
     if not payer or not terminal: return {"valid": False, "error": "Invalid data!"}
 
-    feature_engineering(tx)
-    response: bool = fraud_validation(tx)
+    feature_engineering(tx, transactions)
+    response: bool = is_fraud(tx)
 
     return {"valid": response, "error": None}
 
