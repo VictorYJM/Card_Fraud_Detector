@@ -36,7 +36,9 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     return distance
 
 
-def feature_engineering(tx: TransactionRecord, transactions : DataFrame) -> TransactionProcessed:
+def feature_engineering(
+    tx: TransactionRecord, last_transactions: DataFrame
+) -> TransactionProcessed:
     dt = tx.tx_datetime
 
     tx_hour = dt.hour
@@ -50,4 +52,3 @@ def feature_engineering(tx: TransactionRecord, transactions : DataFrame) -> Tran
     last_longitude = None
 
     # distance_from_last_location_km = haversine_distance(tx.latitude, tx.longitude)
-    
