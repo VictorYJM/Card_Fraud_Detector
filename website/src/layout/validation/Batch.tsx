@@ -107,9 +107,14 @@ const Batch = () => {
 
         try {
             const URL = import.meta.env.VITE_API_CLASSIFY_TRANSACTIONS;
+            const HF = import.meta.env.VITE_API_HUGGING_FACE;
+
             const response = await fetch(URL, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Authorization": `Bearer ${HF}`,
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify(transactionsForApi),
             });
 

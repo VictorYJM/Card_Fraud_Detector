@@ -107,20 +107,36 @@ const Manual = ({ payers, terminals }: ManualProps) => {
         setApiResponse(null);
         setIsLoading(true);
 
+        const payer: Payer | undefined = payers.find(p => String(p.card_id) === cardSelected);
+        const terminal: Terminal | undefined = terminals.find(t => String(t.terminal_id) === terminalSelected);
+        if (!payer || !terminal) {
+            alert("Payer or Terminal not found!");
+            return;
+        }
+
         const transaction: Transaction = {
             card_id: parseInt(cardSelected),
             card_bin: parseInt(cardBin),
+            card_first_transaction: new Date(payer.card_first_transaction),
             terminal_id: parseInt(terminalSelected),
+            latitude: terminal.latitude,
+            longitude: terminal.longitude,
+            terminal_operation_start: new Date(terminal.terminal_operation_start),
             tx_amount: parseFloat(transactionAmount),
             tx_datetime: new Date(transactionDatetime)
         };
+
+        console.log(transaction)
         
         try {
             const URL = import.meta.env.VITE_API_CLASSIFY_TRANSACTION;
+            const HF = import.meta.env.VITE_API_HUGGING_FACE;
+
             const response = await fetch(URL, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${HF}`,
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(transaction),
             });

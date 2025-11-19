@@ -18,7 +18,15 @@ const Display = () => {
         const fetchPayers = async () => {
             try {
                 const URL = import.meta.env.VITE_API_PAYERS;
-                const response = await fetch(URL);
+                const HF = import.meta.env.VITE_API_HUGGING_FACE;
+
+                const response = await fetch(URL, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${HF}`,
+                        "Content-Type": "application/json"
+                    }
+                });
                 if (!response.ok) { throw new Error(`Response status: ${response.status}`); }
 
                 const result = await response.json();
@@ -31,7 +39,15 @@ const Display = () => {
         const fetchTerminals = async () => {
             try {
                 const URL = import.meta.env.VITE_API_TERMINALS;
-                const response = await fetch(URL);
+                const HF = import.meta.env.VITE_API_HUGGING_FACE;
+
+                const response = await fetch(URL, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${HF}`,
+                        "Content-Type": "application/json"
+                    }
+                });
                 if (!response.ok) { throw new Error(`Response status: ${response.status}`); }
 
                 const result = await response.json();
