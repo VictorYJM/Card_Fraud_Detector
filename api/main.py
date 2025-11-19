@@ -40,7 +40,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 def load_data():
-    global payers, terminals, transactions
+    global payers, terminals, transactions, last_transaction_per_card
 
     # 1. Data Loading
     payers = pd.read_parquet(payers_url)
@@ -59,7 +59,7 @@ def load_data():
     df['tx_datetime'] = pd.to_datetime(df['tx_datetime'])
     df.drop(columns=['tx_date', 'tx_time'], inplace = True)
 
-    last_transaction_per_card = df.loc(df.groupby('card_id')['tx_datetime'].idxmax())
+    last_transaction_per_card = df.loc[df.groupby('card_id')['tx_datetime'].idxmax()]
 
     # 2. Data formatting
     # payers = payers.drop(columns="card_first_transaction")
@@ -85,9 +85,9 @@ def get_transactions():
 
 
 # Last Transaction per card
-# @app.get("/last-transactions")
-# def get_last_transactions():
-#     return last_transactions.to_dict(orient="records")
+@app.get("/last-transactions")
+def get_last_transactions():
+    return last_transaction_per_card.to_dict(orient="records")
 
 
 # Transaction classify

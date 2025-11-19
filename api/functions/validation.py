@@ -1,11 +1,12 @@
 from api.models.TransactionRecord import TransactionRecord
-import pickle
+import joblib
+import os
+import sklearn
 
-model : any
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "..", "ai_model", "et_model.pkl")
 
-with open('../ai_model/et_model.pkl') as f:
-    model = pickle.load(f)
+model = joblib.load(MODEL_PATH)
     
 def is_fraud(tx: TransactionRecord) -> bool:
-
-    return False
+    pass

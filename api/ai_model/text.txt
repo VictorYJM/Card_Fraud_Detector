@@ -1,1 +1,1 @@
-the ai model will be in this directory
+here is the et_model directory
