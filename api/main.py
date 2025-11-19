@@ -21,12 +21,11 @@ terminals_url = os.getenv("TERMINALS_PATH") or (_ for _ in ()).throw(
 transactions_url = os.getenv("TRANSACTIONS_PATH") or (_ for _ in ()).throw(
     ValueError("TRANSACTIONS_PATH missing!")
 )
-# last_transactions_url = os.getenv("LAST_TRANSACTIONS_PATH") or (_ for _ in ()).throw(ValueError("LAST_TRANSACTIONS_PATH missing!"))
 app = FastAPI()
 payers: pd.DataFrame
 terminals: pd.DataFrame
 transactions: pd.DataFrame
-last_transactions: pd.DataFrame
+last_transaction_per_card: pd.DataFrame
 
 # CORS configs
 origins = ["https://victoryjm-card-fraud-detection.hf.space"]
@@ -48,7 +47,19 @@ def load_data():
     terminals = pd.read_parquet(terminals_url)
     transactions = pd.read_parquet(transactions_url)
 
-    # last_transactions = pd.read_parquet(last_transactions_url)
+    payers.columns = payers.columns.str.lower().str.strip()
+    terminals.columns = terminals.columns.str.lower().str.strip()
+    transactions.columns = transactions.columns.str.lower().str.strip()
+
+    payers.rename(columns={"card_hash":"card_id"}, inplace=True)
+
+    df = pd.merge(transactions, payers, left_on="card_id", right_on="card_id")
+    df = pd.merge(df, terminals, left_on="terminal_id", right_on="terminal_id")
+
+    df['tx_datetime'] = pd.to_datetime(df['tx_datetime'])
+    df.drop(columns=['tx_date', 'tx_time'], inplace = True)
+
+    last_transaction_per_card = df.loc(df.groupby('card_id')['tx_datetime'].idxmax())
 
     # 2. Data formatting
     # payers = payers.drop(columns="card_first_transaction")
@@ -89,7 +100,7 @@ def classify_transaction(tx: TransactionRecord):
     if not payer or not terminal:
         return {"valid": False, "error": "Invalid data!"}
 
-    feature_engineering(tx, last_transactions)
+    feature_engineering(tx, last_transaction_per_card)
     response: bool = is_fraud(tx)
 
     return {"valid": response, "error": None}
