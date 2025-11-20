@@ -236,7 +236,12 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                     <Dropdown
                         items={filteredTerminals}
                         getKey={(terminal) => terminal.terminal_id}
-                        renderItem={(terminal) => <>{terminal.terminal_soft_descriptor}</>}
+                        renderItem={(terminal) => (
+                            <>
+                                {terminal.terminal_soft_descriptor} 
+                                <span className="text-gray-500 ml-2">(ID: {terminal.terminal_id})</span>
+                            </>
+                        )}
                         onSelectItems={(terminal) => {
                             setTerminalSearch(terminal.terminal_soft_descriptor);
                             setTerminalSelected(String(terminal.terminal_id));
