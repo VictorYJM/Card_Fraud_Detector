@@ -108,14 +108,9 @@ const Batch = () => {
         setClassificationResults([]);
 
         const transactionsForApi = transactions.map(tx => ({
-            card_id: tx.card_id,
-            card_bin: tx.card_bin,
+            ...tx,
             card_first_transaction: tx.card_first_transaction.toISOString(),
-            terminal_id: tx.terminal_id,
-            latitude: tx.latitude,
-            longitude: tx.longitude,
             terminal_operation_start: tx.terminal_operation_start.toISOString(),
-            tx_amount: tx.tx_amount,
             tx_datetime: tx.tx_datetime.toISOString()
         }));
 

@@ -76,26 +76,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
 
     const handleDatetimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        if (!value) {
-            setTransactionDatetime("");
-            return;
-        }
-        
-        const selectedDate = new Date(value);
-
-        if (isNaN(selectedDate.getTime())) { return; }
-
-        let finalDate = selectedDate;        
-
-        const year = finalDate.getFullYear();
-        const month = String(finalDate.getMonth() + 1).padStart(2, "0");
-        const day = String(finalDate.getDate()).padStart(2, "0");
-        const hours = String(finalDate.getHours()).padStart(2, "0");
-        const minutes = String(finalDate.getMinutes()).padStart(2, "0");
-        const seconds = String(finalDate.getSeconds()).padStart(2, "0");
-
-        const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-        setTransactionDatetime(formattedDate);
+        setTransactionDatetime(value);
     };
 
     const handleClassify = async () => {
@@ -117,7 +98,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
         }
 
         const transaction: Transaction = {
-            card_id: payer.card_id,
+            card_id: Number(payer.card_id),
             card_bin: payer.card_bin,
             card_first_transaction: new Date(payer.card_first_transaction),
             terminal_id: terminal.terminal_id,
@@ -146,6 +127,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
             if (!response.ok) { throw new Error(`API Error: ${response.statusText}`); }
 
             const result: ApiResponse = await response.json();
+            console.log(result);
             setApiResponse(result);
         }
 
@@ -168,18 +150,18 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                     <Input
                         value={cardSearch}
                         onChange={(e) => {
-                            const value = e.target.value;
+                            const value = e.target.value.replace(/\D/g, '');
                             setCardSearch(value);
                             setShowCardDropdown(true);
                             
                             const exactMatch = payers.find(p => String(p.card_id) === value);
-
-                            (exactMatch) ? setCardSelected(value) : setCardSelected("")
+                            (exactMatch) ? setCardSelected(value) : setCardSelected("");
                         }}
                         placeholder="Type to search for card..."
                         label="Card ID"
                         labelStyle="font-bold block mb-2"
-                        type="number"
+                        type="text"
+                        inputMode="numeric"
                         inputStyle="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     
