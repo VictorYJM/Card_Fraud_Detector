@@ -21,7 +21,11 @@ const Manual = ({ payers, terminals }: ManualProps) => {
     const [terminalSelected, setTerminalSelected] = useState<string>("");
 
     const [cardBin, setCardBin] = useState<string>("");
-    const [transactionDatetime, setTransactionDatetime] = useState<string>("2018-01-01T00:00:10");
+    const [transactionDatetime, setTransactionDatetime] = useState<string>(() => {
+        const now = new Date();
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+        return now.toISOString().slice(0, 19);
+    });
     const [transactionAmount, setTransactionAmount] = useState<string>("0.01");
 
     const [showCardDropdown, setShowCardDropdown] = useState<boolean>(false);
@@ -78,14 +82,10 @@ const Manual = ({ payers, terminals }: ManualProps) => {
         }
         
         const selectedDate = new Date(value);
-        const minDate = new Date("2018-01-01T00:00:10");
-        const maxDate = new Date("2018-05-31T23:59:38");
 
         if (isNaN(selectedDate.getTime())) { return; }
 
-        let finalDate = selectedDate;
-        if (finalDate < minDate) { finalDate = minDate; }
-        else if (finalDate > maxDate) { finalDate = maxDate; }
+        let finalDate = selectedDate;        
 
         const year = finalDate.getFullYear();
         const month = String(finalDate.getMonth() + 1).padStart(2, "0");
@@ -254,8 +254,6 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                     label="Transaction Date & Time"
                     labelStyle="font-bold block mb-2"
                     type="datetime-local"
-                    min="2018-01-01T00:00:10"
-                    max="2018-05-31T23:59:38"
                     inputStyle="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>

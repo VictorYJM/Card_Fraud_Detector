@@ -10,7 +10,12 @@ function isTransaction(obj: any): obj is Transaction {
     return (
         typeof obj === "object" && obj !== null &&
         typeof obj.card_id === "number" &&
+        typeof obj.card_bin === "number" &&
         typeof obj.terminal_id === "number" &&
+        typeof obj.card_first_transaction === "string" &&
+        typeof obj.latitude === "number" &&
+        typeof obj.longitude === "number" &&
+        typeof obj.terminal_operation_start === "string" &&
         typeof obj.tx_amount === "number" &&
         typeof obj.tx_datetime === "string"
     );
@@ -74,6 +79,8 @@ const Batch = () => {
                 const formattedTransactions: Transaction[] = data.map(tx => ({
                     ...tx,
                     tx_datetime: new Date(tx.tx_datetime),
+                    card_first_transaction: new Date(tx.card_first_transaction),
+                    terminal_operation_start: new Date(tx.terminal_operation_start),
                 }));
                 
                 setTransactions(formattedTransactions);
@@ -101,9 +108,20 @@ const Batch = () => {
         setClassificationResults([]);
 
         const transactionsForApi = transactions.map(tx => ({
-            ...tx,
-            tx_datetime: tx.tx_datetime.toISOString(),
+            card_id: tx.card_id,
+            card_bin: tx.card_bin,
+            card_first_transaction: tx.card_first_transaction.toISOString(),
+            terminal_id: tx.terminal_id,
+            latitude: tx.latitude,
+            longitude: tx.longitude,
+            terminal_operation_start: tx.terminal_operation_start.toISOString(),
+            tx_amount: tx.tx_amount,
+            tx_datetime: tx.tx_datetime.toISOString()
         }));
+
+        transactionsForApi.forEach(element => {
+            console.log(element)
+        });
 
         try {
             const URL = import.meta.env.VITE_API_CLASSIFY_TRANSACTIONS;

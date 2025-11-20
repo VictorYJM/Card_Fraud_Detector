@@ -1,37 +1,57 @@
 [
   {
-    "card_id": 30437598248134,
-    "card_bin": 305107,
-    "terminal_id": 1240,
-    "tx_amount": 1896.41,
-    "tx_datetime": "2018-05-31T09:25:49.539Z"
+    "card_id": 3528580330864149,
+    "card_bin": 546566,
+    "card_first_transaction": "2016-11-07T00:00:00.000Z",
+    "terminal_id": 247,
+    "latitude": -3.081182203047681,
+    "longitude": -59.95505677970138,
+    "terminal_operation_start": "2017-02-28T00:00:00.000Z",
+    "tx_amount": 412.16,
+    "tx_datetime": "2018-03-17T03:28:29.314Z"
   },
   {
-    "card_id": 6011886580720080,
-    "card_bin": 569117,
-    "terminal_id": 1278,
-    "tx_amount": 485.37,
-    "tx_datetime": "2018-01-23T13:13:40.895Z"
+    "card_id": 340625452531216,
+    "card_bin": 501837,
+    "card_first_transaction": "2017-09-01T00:00:00.000Z",
+    "terminal_id": 1654,
+    "latitude": -23.481598368428084,
+    "longitude": -46.67703232352797,
+    "terminal_operation_start": "2018-02-26T00:00:00.000Z",
+    "tx_amount": 7798.24,
+    "tx_datetime": "2018-04-26T09:24:18.139Z"
   },
   {
-    "card_id": 38130597618017,
-    "card_bin": 655698,
-    "terminal_id": 993,
-    "tx_amount": 3930.05,
-    "tx_datetime": "2018-02-23T19:15:52.178Z"
+    "card_id": 6011505725168449,
+    "card_bin": 180088,
+    "card_first_transaction": "2018-01-18T00:00:00.000Z",
+    "terminal_id": 21,
+    "latitude": -15.764350783680117,
+    "longitude": -47.90099061178203,
+    "terminal_operation_start": "2016-08-17T00:00:00.000Z",
+    "tx_amount": 8953.17,
+    "tx_datetime": "2018-04-14T23:32:53.250Z"
   },
   {
-    "card_id": 30299672248558,
-    "card_bin": 651850,
-    "terminal_id": 558,
-    "tx_amount": 1728.78,
-    "tx_datetime": "2018-04-02T06:22:48.798Z"
+    "card_id": 340979215835038,
+    "card_bin": 553685,
+    "card_first_transaction": "2017-02-15T00:00:00.000Z",
+    "terminal_id": 1002,
+    "latitude": -2.960794961054397,
+    "longitude": -60.00265120429193,
+    "terminal_operation_start": "2017-10-10T00:00:00.000Z",
+    "tx_amount": 6338.1,
+    "tx_datetime": "2018-03-12T06:58:41.887Z"
   },
   {
-    "card_id": 3508492970453866,
-    "card_bin": 413267,
-    "terminal_id": 1797,
-    "tx_amount": 725.61,
-    "tx_datetime": "2018-02-26T04:40:07.460Z"
+    "card_id": 4337918025022665,
+    "card_bin": 546566,
+    "card_first_transaction": "2017-06-08T00:00:00.000Z",
+    "terminal_id": 691,
+    "latitude": -23.62682931784014,
+    "longitude": -46.627656387934046,
+    "terminal_operation_start": "2017-07-09T00:00:00.000Z",
+    "tx_amount": 6447.53,
+    "tx_datetime": "2018-01-01T20:28:53.854Z"
   }
 ]
