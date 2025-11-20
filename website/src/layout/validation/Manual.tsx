@@ -107,18 +107,20 @@ const Manual = ({ payers, terminals }: ManualProps) => {
         setApiResponse(null);
         setIsLoading(true);
 
-        const payer: Payer | undefined = payers.find(p => String(p.card_id) === cardSelected);
-        const terminal: Terminal | undefined = terminals.find(t => String(t.terminal_id) === terminalSelected);
+        const payer: Payer | undefined = payers.find(p => String(p.card_id) === cardSearch);
+        const terminal: Terminal | undefined = terminals.find(t => t.terminal_soft_descriptor === terminalSearch);
+
         if (!payer || !terminal) {
-            alert("Payer or Terminal not found!");
+            alert("Payer or Terminal not found based on the text fields!");
+            setIsLoading(false);
             return;
         }
 
         const transaction: Transaction = {
-            card_id: parseInt(cardSelected),
-            card_bin: parseInt(cardBin),
+            card_id: payer.card_id,
+            card_bin: payer.card_bin,
             card_first_transaction: new Date(payer.card_first_transaction),
-            terminal_id: parseInt(terminalSelected),
+            terminal_id: terminal.terminal_id,
             latitude: terminal.latitude,
             longitude: terminal.longitude,
             terminal_operation_start: new Date(terminal.terminal_operation_start),
