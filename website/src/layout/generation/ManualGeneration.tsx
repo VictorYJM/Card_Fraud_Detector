@@ -134,21 +134,10 @@ const ManualGeneration = ({ payers, terminals }: ManualGenerationProps) => {
             return;
         }
 
-        const payer: Payer | undefined = payers.find(p => String(p.card_id) === cardSelected);
-        const terminal: Terminal | undefined = terminals.find(t => String(t.terminal_id) === terminalSelected);
-        if (!payer || !terminal) {
-            alert("Payer or Terminal not found!");
-            return;
-        }
-
         const transaction: Transaction = {
             card_id: parseInt(cardSelected),
             card_bin: parseInt(cardBin),
-            card_first_transaction: new Date(payer.card_first_transaction),
             terminal_id: parseInt(terminalSelected),
-            latitude: terminal.latitude,
-            longitude: terminal.longitude,
-            terminal_operation_start: new Date(terminal.terminal_operation_start),
             tx_amount: parseFloat(transactionAmount),
             tx_datetime: new Date(transactionDatetime)
         };
@@ -156,19 +145,8 @@ const ManualGeneration = ({ payers, terminals }: ManualGenerationProps) => {
         setTransactions(prev => [...prev, transaction]);
     };
 
-    const handleSave = () => {
-        if (transactions.length === 0) {
-            alert("There's no transaction to save!")
-            return;
-        }
-
-        const dataStr = JSON.stringify(transactions, null, 2);
-        const blob = new Blob([dataStr], { type: "application/json" });
-
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "transactions.json";
-        link.click();
+    const handleClassify = () => {
+        console.log("its over");
     };
 
     return (
@@ -314,10 +292,10 @@ const ManualGeneration = ({ payers, terminals }: ManualGenerationProps) => {
             {/* Transactions Classify */}
             <div className="mt-8 mb-6 flex-1 items-start">
                 <button
-                    onClick={handleSave}
+                    onClick={handleClassify}
                     className="w-full rounded-2xl border-2 border-black font-bold hover:bg-gray-100 active:bg-gray-200"
                 >
-                    Save Transactions
+                    Classify Transactions
                 </button>
             </div>
         </div>

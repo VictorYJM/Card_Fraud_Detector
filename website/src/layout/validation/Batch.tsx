@@ -177,17 +177,14 @@ const Batch = () => {
             )}
 
             {/* Classify Transactions */}
-            {transactions.length > 0 && (
-                <div className="mt-8 mb-6 flex gap-4 items-start">
-                    <button
-                        onClick={handleClassify}
-                        disabled={isLoading}
-                        className="w-full rounded-2xl border-2 border-black font-bold p-3 hover:bg-gray-100 active:bg-gray-200 disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    >
-                        {isLoading ? "Classifying..." : "Classify Transactions"}
-                    </button>
-                </div>
-            )}
+            <div className="mt-8 mb-6 flex gap-4 items-start">
+                <button
+                    onClick={handleClassify}
+                    className="w-full rounded-2xl border-2 border-black font-bold hover:bg-gray-100 active:bg-gray-200"
+                >
+                    Classify Transactions
+                </button>
+            </div>
         </div>
     );
 };

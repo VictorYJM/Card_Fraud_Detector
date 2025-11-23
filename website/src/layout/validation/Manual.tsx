@@ -21,11 +21,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
     const [terminalSelected, setTerminalSelected] = useState<string>("");
 
     const [cardBin, setCardBin] = useState<string>("");
-    const [transactionDatetime, setTransactionDatetime] = useState<string>(() => {
-        const now = new Date();
-        now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-        return now.toISOString().slice(0, 19);
-    });
+    const [transactionDatetime, setTransactionDatetime] = useState<string>("2018-01-01T00:00:10");
     const [transactionAmount, setTransactionAmount] = useState<string>("0.01");
 
     const [showCardDropdown, setShowCardDropdown] = useState<boolean>(false);
@@ -108,35 +104,6 @@ const Manual = ({ payers, terminals }: ManualProps) => {
             tx_amount: parseFloat(transactionAmount),
             tx_datetime: new Date(transactionDatetime)
         };
-
-        console.log(transaction)
-        
-        try {
-            const URL = import.meta.env.VITE_API_CLASSIFY_TRANSACTION;
-            const HF = import.meta.env.VITE_API_HUGGING_FACE;
-
-            const response = await fetch(URL, {
-                method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${HF}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(transaction),
-            });
-
-            if (!response.ok) { throw new Error(`API Error: ${response.statusText}`); }
-
-            const result: ApiResponse = await response.json();
-            console.log(result);
-            setApiResponse(result);
-        }
-
-        catch (error) {
-            setApiResponse({
-                valid: false,
-                error: "Failed to connect to the server. Please try again."
-            });
-        }
 
         finally { setIsLoading(false); }
     };
