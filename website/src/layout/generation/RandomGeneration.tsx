@@ -70,11 +70,7 @@ const RandomGeneration = ({ payers, terminals }: RandomGenerationProps) => {
             newTransactions.push({
                 card_id: randomPayer.card_id,
                 card_bin: randomPayer.card_bin,
-                card_first_transaction: new Date(randomPayer.card_first_transaction),
                 terminal_id: randomTerminal.terminal_id,
-                latitude: randomTerminal.latitude,
-                longitude: randomTerminal.longitude,
-                terminal_operation_start: new Date(randomTerminal.terminal_operation_start),
                 tx_amount: parseFloat(parseFloat(randomAmount).toFixed(2)),
                 tx_datetime: randomDate,
             });

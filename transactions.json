@@ -1,57 +1,702 @@
 [
   {
-    "card_id": 3528580330864149,
+    "card_id": 4586268503855,
+    "card_bin": 435240,
+    "terminal_id": 809,
+    "tx_amount": 5015.54,
+    "tx_datetime": "2018-01-01T10:52:29.463Z"
+  },
+  {
+    "card_id": 4255614178437606,
+    "card_bin": 375780,
+    "terminal_id": 1518,
+    "tx_amount": 723.83,
+    "tx_datetime": "2018-03-29T14:36:55.820Z"
+  },
+  {
+    "card_id": 4419446644537070,
+    "card_bin": 356319,
+    "terminal_id": 1942,
+    "tx_amount": 215.81,
+    "tx_datetime": "2018-02-09T11:43:34.293Z"
+  },
+  {
+    "card_id": 38532386377368,
+    "card_bin": 372351,
+    "terminal_id": 181,
+    "tx_amount": 591.42,
+    "tx_datetime": "2018-03-16T21:33:30.513Z"
+  },
+  {
+    "card_id": 370657022458524,
+    "card_bin": 359877,
+    "terminal_id": 83,
+    "tx_amount": 2842.73,
+    "tx_datetime": "2018-03-15T07:45:58.500Z"
+  },
+  {
+    "card_id": 4076660695085268,
     "card_bin": 546566,
-    "card_first_transaction": "2016-11-07T00:00:00.000Z",
-    "terminal_id": 247,
-    "latitude": -3.081182203047681,
-    "longitude": -59.95505677970138,
-    "terminal_operation_start": "2017-02-28T00:00:00.000Z",
-    "tx_amount": 412.16,
-    "tx_datetime": "2018-03-17T03:28:29.314Z"
+    "terminal_id": 415,
+    "tx_amount": 3148.34,
+    "tx_datetime": "2018-05-18T04:18:32.928Z"
   },
   {
-    "card_id": 340625452531216,
-    "card_bin": 501837,
-    "card_first_transaction": "2017-09-01T00:00:00.000Z",
-    "terminal_id": 1654,
-    "latitude": -23.481598368428084,
-    "longitude": -46.67703232352797,
-    "terminal_operation_start": "2018-02-26T00:00:00.000Z",
-    "tx_amount": 7798.24,
-    "tx_datetime": "2018-04-26T09:24:18.139Z"
+    "card_id": 4404251497463490,
+    "card_bin": 356697,
+    "terminal_id": 1156,
+    "tx_amount": 1152.29,
+    "tx_datetime": "2018-03-14T07:15:01.352Z"
   },
   {
-    "card_id": 6011505725168449,
-    "card_bin": 180088,
-    "card_first_transaction": "2018-01-18T00:00:00.000Z",
-    "terminal_id": 21,
-    "latitude": -15.764350783680117,
-    "longitude": -47.90099061178203,
-    "terminal_operation_start": "2016-08-17T00:00:00.000Z",
-    "tx_amount": 8953.17,
-    "tx_datetime": "2018-04-14T23:32:53.250Z"
+    "card_id": 180077562691428,
+    "card_bin": 546566,
+    "terminal_id": 1168,
+    "tx_amount": 7475.96,
+    "tx_datetime": "2018-03-21T08:39:47.142Z"
   },
   {
-    "card_id": 340979215835038,
+    "card_id": 3574447939117175,
+    "card_bin": 241274,
+    "terminal_id": 300,
+    "tx_amount": 425.21,
+    "tx_datetime": "2018-01-29T08:04:59.678Z"
+  },
+  {
+    "card_id": 4214526471246338,
+    "card_bin": 502003,
+    "terminal_id": 136,
+    "tx_amount": 9847.56,
+    "tx_datetime": "2018-05-15T06:45:22.759Z"
+  },
+  {
+    "card_id": 4604678203690610,
+    "card_bin": 546566,
+    "terminal_id": 1089,
+    "tx_amount": 522.01,
+    "tx_datetime": "2018-05-02T22:59:46.380Z"
+  },
+  {
+    "card_id": 342185093206569,
+    "card_bin": 303471,
+    "terminal_id": 870,
+    "tx_amount": 839.77,
+    "tx_datetime": "2018-03-25T15:55:07.380Z"
+  },
+  {
+    "card_id": 4157160426144718,
+    "card_bin": 412004,
+    "terminal_id": 736,
+    "tx_amount": 6073.82,
+    "tx_datetime": "2018-01-22T14:09:16.031Z"
+  },
+  {
+    "card_id": 3544952666457022,
+    "card_bin": 60450,
+    "terminal_id": 1617,
+    "tx_amount": 3642.3,
+    "tx_datetime": "2018-04-15T23:40:10.849Z"
+  },
+  {
+    "card_id": 4662230886158926,
+    "card_bin": 481219,
+    "terminal_id": 1423,
+    "tx_amount": 5456.09,
+    "tx_datetime": "2018-02-21T04:11:00.869Z"
+  },
+  {
+    "card_id": 348418757617654,
+    "card_bin": 355137,
+    "terminal_id": 451,
+    "tx_amount": 2976.25,
+    "tx_datetime": "2018-01-12T15:05:48.313Z"
+  },
+  {
+    "card_id": 4518849198665,
+    "card_bin": 354034,
+    "terminal_id": 1669,
+    "tx_amount": 2741.65,
+    "tx_datetime": "2018-02-10T12:14:43.574Z"
+  },
+  {
+    "card_id": 3565203758309455,
+    "card_bin": 435240,
+    "terminal_id": 914,
+    "tx_amount": 211.96,
+    "tx_datetime": "2018-01-23T12:02:33.909Z"
+  },
+  {
+    "card_id": 3524894204664897,
     "card_bin": 553685,
-    "card_first_transaction": "2017-02-15T00:00:00.000Z",
-    "terminal_id": 1002,
-    "latitude": -2.960794961054397,
-    "longitude": -60.00265120429193,
-    "terminal_operation_start": "2017-10-10T00:00:00.000Z",
-    "tx_amount": 6338.1,
-    "tx_datetime": "2018-03-12T06:58:41.887Z"
+    "terminal_id": 1735,
+    "tx_amount": 2981.24,
+    "tx_datetime": "2018-02-01T22:50:18.455Z"
   },
   {
-    "card_id": 4337918025022665,
+    "card_id": 6505752966471180,
+    "card_bin": 213171,
+    "terminal_id": 305,
+    "tx_amount": 2255.22,
+    "tx_datetime": "2018-04-10T17:26:07.253Z"
+  },
+  {
+    "card_id": 2255549444429736,
+    "card_bin": 415869,
+    "terminal_id": 471,
+    "tx_amount": 3784.46,
+    "tx_datetime": "2018-03-25T20:53:23.668Z"
+  },
+  {
+    "card_id": 4298940626076,
+    "card_bin": 676257,
+    "terminal_id": 275,
+    "tx_amount": 5630.79,
+    "tx_datetime": "2018-02-07T03:25:17.003Z"
+  },
+  {
+    "card_id": 30418948543291,
+    "card_bin": 241274,
+    "terminal_id": 686,
+    "tx_amount": 8474.47,
+    "tx_datetime": "2018-03-30T13:45:03.489Z"
+  },
+  {
+    "card_id": 4778928388129854,
+    "card_bin": 241274,
+    "terminal_id": 25,
+    "tx_amount": 5920.18,
+    "tx_datetime": "2018-02-15T23:29:55.710Z"
+  },
+  {
+    "card_id": 4154409676242857500,
+    "card_bin": 472400,
+    "terminal_id": 953,
+    "tx_amount": 8313.53,
+    "tx_datetime": "2018-03-09T03:12:16.252Z"
+  },
+  {
+    "card_id": 2299385977790147,
+    "card_bin": 463421,
+    "terminal_id": 436,
+    "tx_amount": 1260.49,
+    "tx_datetime": "2018-04-09T15:58:22.040Z"
+  },
+  {
+    "card_id": 5261128951697814,
+    "card_bin": 355182,
+    "terminal_id": 223,
+    "tx_amount": 9460.04,
+    "tx_datetime": "2018-04-28T23:13:35.405Z"
+  },
+  {
+    "card_id": 2243258196348137,
+    "card_bin": 213171,
+    "terminal_id": 179,
+    "tx_amount": 4337.96,
+    "tx_datetime": "2018-05-02T09:56:16.018Z"
+  },
+  {
+    "card_id": 6597677622827724,
+    "card_bin": 355137,
+    "terminal_id": 1912,
+    "tx_amount": 3738.25,
+    "tx_datetime": "2018-02-05T01:22:15.350Z"
+  },
+  {
+    "card_id": 213175199198170,
+    "card_bin": 241274,
+    "terminal_id": 1557,
+    "tx_amount": 1136.08,
+    "tx_datetime": "2018-03-11T14:09:57.254Z"
+  },
+  {
+    "card_id": 2274827002933134,
+    "card_bin": 436541,
+    "terminal_id": 1258,
+    "tx_amount": 2277.91,
+    "tx_datetime": "2018-05-05T17:57:57.483Z"
+  },
+  {
+    "card_id": 3552951712227644,
+    "card_bin": 343963,
+    "terminal_id": 1145,
+    "tx_amount": 4259.37,
+    "tx_datetime": "2018-05-16T10:01:35.417Z"
+  },
+  {
+    "card_id": 676134761284,
+    "card_bin": 355137,
+    "terminal_id": 589,
+    "tx_amount": 1089.96,
+    "tx_datetime": "2018-05-29T22:27:40.014Z"
+  },
+  {
+    "card_id": 60406155816,
+    "card_bin": 305107,
+    "terminal_id": 1493,
+    "tx_amount": 559.63,
+    "tx_datetime": "2018-01-15T13:18:39.496Z"
+  },
+  {
+    "card_id": 372439587395922,
+    "card_bin": 381331,
+    "terminal_id": 1272,
+    "tx_amount": 5626.34,
+    "tx_datetime": "2018-04-24T16:30:55.441Z"
+  },
+  {
+    "card_id": 180001026439158,
+    "card_bin": 364835,
+    "terminal_id": 1492,
+    "tx_amount": 1641.28,
+    "tx_datetime": "2018-03-09T22:03:41.387Z"
+  },
+  {
+    "card_id": 38030544594065,
+    "card_bin": 436541,
+    "terminal_id": 151,
+    "tx_amount": 9153.85,
+    "tx_datetime": "2018-05-16T22:57:05.755Z"
+  },
+  {
+    "card_id": 345917393010557,
+    "card_bin": 548244,
+    "terminal_id": 1038,
+    "tx_amount": 1683.84,
+    "tx_datetime": "2018-04-17T18:28:37.756Z"
+  },
+  {
+    "card_id": 6502076245130968,
+    "card_bin": 472400,
+    "terminal_id": 1624,
+    "tx_amount": 3923.66,
+    "tx_datetime": "2018-05-17T08:10:27.302Z"
+  },
+  {
+    "card_id": 3579866177067369,
+    "card_bin": 359877,
+    "terminal_id": 1657,
+    "tx_amount": 3684.15,
+    "tx_datetime": "2018-04-11T03:34:49.002Z"
+  },
+  {
+    "card_id": 373349232124305,
+    "card_bin": 359877,
+    "terminal_id": 1661,
+    "tx_amount": 5501.25,
+    "tx_datetime": "2018-01-23T16:10:18.098Z"
+  },
+  {
+    "card_id": 4989062327237179000,
+    "card_bin": 406409,
+    "terminal_id": 753,
+    "tx_amount": 5213.21,
+    "tx_datetime": "2018-01-20T05:10:53.795Z"
+  },
+  {
+    "card_id": 213162896964542,
+    "card_bin": 60450,
+    "terminal_id": 636,
+    "tx_amount": 4456.44,
+    "tx_datetime": "2018-04-24T12:04:40.098Z"
+  },
+  {
+    "card_id": 3579359782071513,
+    "card_bin": 305655,
+    "terminal_id": 65,
+    "tx_amount": 6314.19,
+    "tx_datetime": "2018-02-22T14:40:28.076Z"
+  },
+  {
+    "card_id": 4810463632016,
+    "card_bin": 472400,
+    "terminal_id": 796,
+    "tx_amount": 4894.79,
+    "tx_datetime": "2018-01-19T15:37:57.489Z"
+  },
+  {
+    "card_id": 4149135775949298,
+    "card_bin": 503889,
+    "terminal_id": 1861,
+    "tx_amount": 9478.02,
+    "tx_datetime": "2018-05-14T06:13:45.519Z"
+  },
+  {
+    "card_id": 6510168311395003,
+    "card_bin": 553685,
+    "terminal_id": 952,
+    "tx_amount": 3948.66,
+    "tx_datetime": "2018-05-26T16:14:39.663Z"
+  },
+  {
+    "card_id": 30096501772737,
+    "card_bin": 356697,
+    "terminal_id": 785,
+    "tx_amount": 5734.08,
+    "tx_datetime": "2018-03-14T16:08:36.574Z"
+  },
+  {
+    "card_id": 676337776584,
+    "card_bin": 300262,
+    "terminal_id": 773,
+    "tx_amount": 2923.07,
+    "tx_datetime": "2018-02-13T04:04:33.523Z"
+  },
+  {
+    "card_id": 180078483034854,
+    "card_bin": 358161,
+    "terminal_id": 1127,
+    "tx_amount": 9226.47,
+    "tx_datetime": "2018-03-22T14:58:10.651Z"
+  },
+  {
+    "card_id": 6566049037647476,
+    "card_bin": 60450,
+    "terminal_id": 734,
+    "tx_amount": 5582.49,
+    "tx_datetime": "2018-03-24T12:10:11.701Z"
+  },
+  {
+    "card_id": 575596576570,
+    "card_bin": 415869,
+    "terminal_id": 1076,
+    "tx_amount": 7875.8,
+    "tx_datetime": "2018-01-26T07:47:48.143Z"
+  },
+  {
+    "card_id": 30453343357849,
+    "card_bin": 241274,
+    "terminal_id": 45,
+    "tx_amount": 5492.85,
+    "tx_datetime": "2018-02-07T15:49:08.084Z"
+  },
+  {
+    "card_id": 378819597721684,
+    "card_bin": 341003,
+    "terminal_id": 1997,
+    "tx_amount": 9027.4,
+    "tx_datetime": "2018-04-26T04:32:11.905Z"
+  },
+  {
+    "card_id": 4155427714104528,
+    "card_bin": 553685,
+    "terminal_id": 389,
+    "tx_amount": 270.48,
+    "tx_datetime": "2018-02-02T20:10:15.031Z"
+  },
+  {
+    "card_id": 4273261941123634700,
+    "card_bin": 472400,
+    "terminal_id": 984,
+    "tx_amount": 1233.32,
+    "tx_datetime": "2018-02-02T11:42:36.933Z"
+  },
+  {
+    "card_id": 4641336797274352000,
+    "card_bin": 241274,
+    "terminal_id": 1461,
+    "tx_amount": 4541.5,
+    "tx_datetime": "2018-02-12T11:23:22.839Z"
+  },
+  {
+    "card_id": 4815614978403690000,
+    "card_bin": 472400,
+    "terminal_id": 877,
+    "tx_amount": 6025.02,
+    "tx_datetime": "2018-01-24T00:23:44.672Z"
+  },
+  {
+    "card_id": 503865585924,
+    "card_bin": 241274,
+    "terminal_id": 294,
+    "tx_amount": 6644.76,
+    "tx_datetime": "2018-02-18T09:15:18.252Z"
+  },
+  {
+    "card_id": 30112218231550,
+    "card_bin": 355182,
+    "terminal_id": 162,
+    "tx_amount": 6232.07,
+    "tx_datetime": "2018-01-12T20:02:19.348Z"
+  },
+  {
+    "card_id": 30261832848933,
+    "card_bin": 435240,
+    "terminal_id": 230,
+    "tx_amount": 9115.68,
+    "tx_datetime": "2018-02-05T16:49:29.827Z"
+  },
+  {
+    "card_id": 6011371175763951,
+    "card_bin": 241274,
+    "terminal_id": 1197,
+    "tx_amount": 4086.85,
+    "tx_datetime": "2018-04-08T05:21:23.944Z"
+  },
+  {
+    "card_id": 378686395613722,
+    "card_bin": 354034,
+    "terminal_id": 1415,
+    "tx_amount": 7158.76,
+    "tx_datetime": "2018-05-02T18:49:08.445Z"
+  },
+  {
+    "card_id": 4537698482824104,
+    "card_bin": 300262,
+    "terminal_id": 1615,
+    "tx_amount": 9516.77,
+    "tx_datetime": "2018-02-17T00:51:54.910Z"
+  },
+  {
+    "card_id": 3579383413813911,
+    "card_bin": 234005,
+    "terminal_id": 1108,
+    "tx_amount": 6874.12,
+    "tx_datetime": "2018-02-11T06:18:58.217Z"
+  },
+  {
+    "card_id": 4566731584171472,
+    "card_bin": 473829,
+    "terminal_id": 944,
+    "tx_amount": 870.37,
+    "tx_datetime": "2018-02-17T11:58:51.253Z"
+  },
+  {
+    "card_id": 6011109728938211,
+    "card_bin": 180088,
+    "terminal_id": 782,
+    "tx_amount": 6612.11,
+    "tx_datetime": "2018-04-25T09:32:01.288Z"
+  },
+  {
+    "card_id": 343366653844267,
+    "card_bin": 303471,
+    "terminal_id": 409,
+    "tx_amount": 4026.86,
+    "tx_datetime": "2018-05-24T03:01:12.398Z"
+  },
+  {
+    "card_id": 3562473149864301,
+    "card_bin": 472400,
+    "terminal_id": 584,
+    "tx_amount": 9032.79,
+    "tx_datetime": "2018-04-27T15:36:36.207Z"
+  },
+  {
+    "card_id": 213115744965392,
+    "card_bin": 655698,
+    "terminal_id": 1021,
+    "tx_amount": 9833.96,
+    "tx_datetime": "2018-05-04T02:51:24.605Z"
+  },
+  {
+    "card_id": 4022048728743944,
+    "card_bin": 213124,
+    "terminal_id": 585,
+    "tx_amount": 9825.6,
+    "tx_datetime": "2018-04-03T20:15:11.834Z"
+  },
+  {
+    "card_id": 4212146147683420000,
+    "card_bin": 234005,
+    "terminal_id": 423,
+    "tx_amount": 8662.25,
+    "tx_datetime": "2018-04-03T08:36:23.673Z"
+  },
+  {
+    "card_id": 4480962440630624000,
+    "card_bin": 305107,
+    "terminal_id": 1972,
+    "tx_amount": 7304.9,
+    "tx_datetime": "2018-04-26T05:57:57.561Z"
+  },
+  {
+    "card_id": 3599903037209562,
+    "card_bin": 213124,
+    "terminal_id": 1007,
+    "tx_amount": 9251.21,
+    "tx_datetime": "2018-02-12T17:45:12.689Z"
+  },
+  {
+    "card_id": 630449340391,
+    "card_bin": 471094,
+    "terminal_id": 1464,
+    "tx_amount": 5122.81,
+    "tx_datetime": "2018-02-18T04:11:09.448Z"
+  },
+  {
+    "card_id": 6011474733891478,
+    "card_bin": 404709,
+    "terminal_id": 1475,
+    "tx_amount": 2576.09,
+    "tx_datetime": "2018-05-21T20:50:23.816Z"
+  },
+  {
+    "card_id": 6508670090043658,
+    "card_bin": 364835,
+    "terminal_id": 780,
+    "tx_amount": 2105.74,
+    "tx_datetime": "2018-01-27T18:20:46.210Z"
+  },
+  {
+    "card_id": 502029590317,
+    "card_bin": 553685,
+    "terminal_id": 707,
+    "tx_amount": 5277.3,
+    "tx_datetime": "2018-02-05T10:40:20.275Z"
+  },
+  {
+    "card_id": 4753995431611864,
+    "card_bin": 472400,
+    "terminal_id": 579,
+    "tx_amount": 5134.36,
+    "tx_datetime": "2018-01-16T18:56:08.023Z"
+  },
+  {
+    "card_id": 30480411457532,
+    "card_bin": 472400,
+    "terminal_id": 160,
+    "tx_amount": 8870.63,
+    "tx_datetime": "2018-02-08T02:49:24.971Z"
+  },
+  {
+    "card_id": 3592315110817830,
+    "card_bin": 304687,
+    "terminal_id": 546,
+    "tx_amount": 9378.57,
+    "tx_datetime": "2018-03-08T00:02:41.895Z"
+  },
+  {
+    "card_id": 6011836006511688,
+    "card_bin": 456482,
+    "terminal_id": 515,
+    "tx_amount": 755.66,
+    "tx_datetime": "2018-01-08T23:15:07.312Z"
+  },
+  {
+    "card_id": 180034073071772,
+    "card_bin": 213148,
+    "terminal_id": 387,
+    "tx_amount": 4550.67,
+    "tx_datetime": "2018-02-14T11:18:24.942Z"
+  },
+  {
+    "card_id": 4337504793036143,
+    "card_bin": 492617,
+    "terminal_id": 9,
+    "tx_amount": 8885.74,
+    "tx_datetime": "2018-04-24T05:31:16.548Z"
+  },
+  {
+    "card_id": 4085609406714878500,
+    "card_bin": 676257,
+    "terminal_id": 1776,
+    "tx_amount": 5781.34,
+    "tx_datetime": "2018-01-09T00:42:25.208Z"
+  },
+  {
+    "card_id": 5126334922777082,
+    "card_bin": 676257,
+    "terminal_id": 867,
+    "tx_amount": 4519.71,
+    "tx_datetime": "2018-03-12T00:41:42.478Z"
+  },
+  {
+    "card_id": 4967416623956712000,
+    "card_bin": 472400,
+    "terminal_id": 1115,
+    "tx_amount": 7911.98,
+    "tx_datetime": "2018-02-01T07:24:34.234Z"
+  },
+  {
+    "card_id": 213105404789430,
+    "card_bin": 651850,
+    "terminal_id": 95,
+    "tx_amount": 1420.91,
+    "tx_datetime": "2018-01-10T03:05:37.455Z"
+  },
+  {
+    "card_id": 3518996184833273,
+    "card_bin": 404709,
+    "terminal_id": 1406,
+    "tx_amount": 1205.04,
+    "tx_datetime": "2018-04-02T16:42:48.544Z"
+  },
+  {
+    "card_id": 4724557699987513,
+    "card_bin": 413267,
+    "terminal_id": 1369,
+    "tx_amount": 1273.23,
+    "tx_datetime": "2018-05-26T05:10:00.748Z"
+  },
+  {
+    "card_id": 180033914198117,
+    "card_bin": 213171,
+    "terminal_id": 812,
+    "tx_amount": 2388.69,
+    "tx_datetime": "2018-02-05T23:01:22.311Z"
+  },
+  {
+    "card_id": 4785821062611,
     "card_bin": 546566,
-    "card_first_transaction": "2017-06-08T00:00:00.000Z",
-    "terminal_id": 691,
-    "latitude": -23.62682931784014,
-    "longitude": -46.627656387934046,
-    "terminal_operation_start": "2017-07-09T00:00:00.000Z",
-    "tx_amount": 6447.53,
-    "tx_datetime": "2018-01-01T20:28:53.854Z"
+    "terminal_id": 922,
+    "tx_amount": 9883.06,
+    "tx_datetime": "2018-02-27T11:41:40.811Z"
+  },
+  {
+    "card_id": 3517741184287737,
+    "card_bin": 354034,
+    "terminal_id": 157,
+    "tx_amount": 3270.53,
+    "tx_datetime": "2018-04-23T09:13:02.438Z"
+  },
+  {
+    "card_id": 30269313241916,
+    "card_bin": 60450,
+    "terminal_id": 1008,
+    "tx_amount": 8880.67,
+    "tx_datetime": "2018-01-05T02:57:55.065Z"
+  },
+  {
+    "card_id": 4393594109083773,
+    "card_bin": 481219,
+    "terminal_id": 1786,
+    "tx_amount": 5155.07,
+    "tx_datetime": "2018-03-29T16:52:25.365Z"
+  },
+  {
+    "card_id": 4352488071963147,
+    "card_bin": 341003,
+    "terminal_id": 1876,
+    "tx_amount": 2688.65,
+    "tx_datetime": "2018-03-20T06:39:22.608Z"
+  },
+  {
+    "card_id": 4100462776570,
+    "card_bin": 463421,
+    "terminal_id": 1379,
+    "tx_amount": 7464.61,
+    "tx_datetime": "2018-01-07T15:37:01.585Z"
+  },
+  {
+    "card_id": 6515374051337933,
+    "card_bin": 359972,
+    "terminal_id": 998,
+    "tx_amount": 4901.29,
+    "tx_datetime": "2018-05-27T13:44:43.423Z"
+  },
+  {
+    "card_id": 2705569545717520,
+    "card_bin": 364835,
+    "terminal_id": 1324,
+    "tx_amount": 2781.94,
+    "tx_datetime": "2018-04-02T14:54:13.780Z"
+  },
+  {
+    "card_id": 6515414238614505,
+    "card_bin": 472400,
+    "terminal_id": 395,
+    "tx_amount": 9430.82,
+    "tx_datetime": "2018-02-27T16:47:59.147Z"
   }
 ]

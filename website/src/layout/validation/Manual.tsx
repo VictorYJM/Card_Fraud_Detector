@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 
 import type Payer from "../../types/payers";
 import type Terminal from "../../types/terminals";
-import type ApiResponse from "../../types/ApiResponse";
 import type Transaction from "../../types/transactions";
 
 import Input from "../../common/Input";
@@ -26,9 +25,6 @@ const Manual = ({ payers, terminals }: ManualProps) => {
 
     const [showCardDropdown, setShowCardDropdown] = useState<boolean>(false);
     const [showTerminalDropdown, setShowTerminalDropdown] = useState<boolean>(false);
-
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
 
     const cardDropdownRef = useRef<HTMLDivElement | null>(null);
     const terminalDropdownRef = useRef<HTMLDivElement | null>(null);
@@ -72,40 +68,47 @@ const Manual = ({ payers, terminals }: ManualProps) => {
 
     const handleDatetimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        setTransactionDatetime(value);
-    };
-
-    const handleClassify = async () => {
-        if (!cardSelected || !cardBin || !terminalSelected) {
-            alert("Please fill in all card and terminal fields.");
+        if (!value) {
+            setTransactionDatetime("");
             return;
         }
+        
+        const selectedDate = new Date(value);
+        const minDate = new Date("2018-01-01T00:00:10");
+        const maxDate = new Date("2018-05-31T23:59:38");
 
-        setApiResponse(null);
-        setIsLoading(true);
+        if (isNaN(selectedDate.getTime())) { return; }
 
-        const payer: Payer | undefined = payers.find(p => String(p.card_id) === cardSearch);
-        const terminal: Terminal | undefined = terminals.find(t => t.terminal_soft_descriptor === terminalSearch);
+        let finalDate = selectedDate;
+        if (finalDate < minDate) { finalDate = minDate; }
+        else if (finalDate > maxDate) { finalDate = maxDate; }
 
-        if (!payer || !terminal) {
-            alert("Payer or Terminal not found based on the text fields!");
-            setIsLoading(false);
+        const year = finalDate.getFullYear();
+        const month = String(finalDate.getMonth() + 1).padStart(2, "0");
+        const day = String(finalDate.getDate()).padStart(2, "0");
+        const hours = String(finalDate.getHours()).padStart(2, "0");
+        const minutes = String(finalDate.getMinutes()).padStart(2, "0");
+        const seconds = String(finalDate.getSeconds()).padStart(2, "0");
+
+        const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+        setTransactionDatetime(formattedDate);
+    };
+
+    const handleClassify = () => {
+        if (!cardSelected || !cardBin || !terminalSelected) {
+            alert("Invalid transaction!")
             return;
         }
 
         const transaction: Transaction = {
-            card_id: Number(payer.card_id),
-            card_bin: payer.card_bin,
-            card_first_transaction: new Date(payer.card_first_transaction),
-            terminal_id: terminal.terminal_id,
-            latitude: terminal.latitude,
-            longitude: terminal.longitude,
-            terminal_operation_start: new Date(terminal.terminal_operation_start),
+            card_id: parseInt(cardSelected),
+            card_bin: parseInt(cardBin),
+            terminal_id: parseInt(terminalSelected),
             tx_amount: parseFloat(transactionAmount),
             tx_datetime: new Date(transactionDatetime)
         };
 
-        finally { setIsLoading(false); }
+        console.log(transaction);
     };
 
     return (
@@ -117,18 +120,18 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                     <Input
                         value={cardSearch}
                         onChange={(e) => {
-                            const value = e.target.value.replace(/\D/g, '');
+                            const value = e.target.value;
                             setCardSearch(value);
                             setShowCardDropdown(true);
                             
                             const exactMatch = payers.find(p => String(p.card_id) === value);
-                            (exactMatch) ? setCardSelected(value) : setCardSelected("");
+
+                            (exactMatch) ? setCardSelected(value) : setCardSelected("")
                         }}
                         placeholder="Type to search for card..."
                         label="Card ID"
                         labelStyle="font-bold block mb-2"
-                        type="text"
-                        inputMode="numeric"
+                        type="number"
                         inputStyle="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     
@@ -187,12 +190,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                     <Dropdown
                         items={filteredTerminals}
                         getKey={(terminal) => terminal.terminal_id}
-                        renderItem={(terminal) => (
-                            <>
-                                {terminal.terminal_soft_descriptor} 
-                                <span className="text-gray-500 ml-2">(ID: {terminal.terminal_id})</span>
-                            </>
-                        )}
+                        renderItem={(terminal) => <>{terminal.terminal_soft_descriptor}</>}
                         onSelectItems={(terminal) => {
                             setTerminalSearch(terminal.terminal_soft_descriptor);
                             setTerminalSelected(String(terminal.terminal_id));
@@ -210,6 +208,8 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                     label="Transaction Date & Time"
                     labelStyle="font-bold block mb-2"
                     type="datetime-local"
+                    min="2018-01-01T00:00:10"
+                    max="2018-05-31T23:59:38"
                     inputStyle="w-full p-2 border-2 border-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
@@ -244,13 +244,7 @@ const Manual = ({ payers, terminals }: ManualProps) => {
                 </div>
 
                 <div className="w-3/5 text-center border-2 border-black font-bold">
-                    {!apiResponse && !isLoading && <label>RESPONSE</label>}
-                    {isLoading && <label>Loading...</label>}
-                    {apiResponse && (
-                        <div className={`font-bold ${apiResponse.valid ? "text-green-600" : "text-red-600"}`}>
-                            {apiResponse.error ? `Error: ${apiResponse.error}` : `Transaction is ${apiResponse.valid ? "VALID" : "INVALID"}`}
-                        </div>
-                    )}
+                    <label>RESPONSE</label>
                 </div>
             </div>
         </div>
